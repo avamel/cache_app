@@ -19,4 +19,9 @@ module ApplicationHelper
     "articles/all-#{count}-#{max_updated_at}-#{user_updated_at}"
   end
 
+  def key_user_articles
+    article_updated_at = Article.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "user_article/all-#{article_updated_at}"
+  end
+
 end
