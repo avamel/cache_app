@@ -1,5 +1,5 @@
 %li
-  - cache [article, current_user] do
+  - if current_user
     %h3= article.title
     %p= article.content
     - if can? :update, article
@@ -7,3 +7,12 @@
       \|
     - if can? :destroy, article
       = link_to 'Destroy', article, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - else
+    - cache article do
+      %h3= article.title
+      %p= article.content
+      - if can? :update, article
+        = link_to 'Edit', edit_article_path(article)
+        \|
+      - if can? :destroy, article
+        = link_to 'Destroy', article, :method => :delete, :data => { :confirm => 'Are you sure?' }

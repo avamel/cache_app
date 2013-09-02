@@ -1,3 +1,7 @@
-- cache [cache_key_for_articles, current_user] do
+- if current_user
   %h1 Users
   = render @users
+-else
+  - cache cache_key_for_articles do
+    %h1 Users
+    = render @users
