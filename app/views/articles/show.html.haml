@@ -1,0 +1,13 @@
+.article
+  - cache(@article) do
+    %h1= @article.title
+    %em Created at: #{@article.updated_at} by #{@article.user.name}
+    %br
+    %p= @article.content
+    - if can? :update, @article
+      = link_to 'Edit', edit_article_path(@article)
+      \|
+    - if can? :destroy, @article
+      = link_to 'Destroy', @article, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      \|
+    = link_to 'Show all', root_path

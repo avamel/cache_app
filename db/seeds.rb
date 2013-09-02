@@ -16,3 +16,16 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
+user = User.find_or_create_by_email :name => ENV['USER_NAME'].dup, :email => ENV['USER_EMAIL'].dup, :password => ENV['USER_PASSWORD'].dup, :password_confirmation => ENV['USER_PASSWORD'].dup
+puts 'user: ' << user.name
+user.add_role :author
+
+n = 1
+2000.times do
+  article = Article.create(title: "title#{n}", content: "content#{n}", user_id: 1)
+  puts 'article: ' << article.title
+  n+=1
+  article = Article.create(title: "title#{n}", content: "content#{n}", user_id: 2)
+  n+=1
+  puts 'article: ' << article.title
+end

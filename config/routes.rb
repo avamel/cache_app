@@ -1,5 +1,10 @@
 CacheApp::Application.routes.draw do
-  root :to => "home#index"
+
+  resources :comments
+
+  resources :articles
+
+  root :to => "users#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
 end

@@ -1,0 +1,19 @@
+%h1 Articles
+- @articles.each do |article|
+  .articles
+    %h2.title
+      = link_to article.title, article
+      \
+    -#%strong.comments= pluralize(article.comments.size, 'comment')
+    %p.info Created at: #{article.updated_at} by #{article.user.name}
+    = article.content
+    %p
+    - if can? :update, article
+      = link_to 'Edit', edit_article_path(article)
+      \|
+    - if can? :destroy, article
+      = link_to 'Destroy', article, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%br
+%br
+- if can? :create, Article
+  %p= link_to "New Article", new_article_path
