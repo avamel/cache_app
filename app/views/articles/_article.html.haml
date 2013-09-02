@@ -1,12 +1,7 @@
 %li
-  - if !current_user
-    - cache article do
-      %h3= article.title
-      %p= article.content
-  - else
+  - cache [article, current_user] do
     %h3= article.title
     %p= article.content
-    %p
     - if can? :update, article
       = link_to 'Edit', edit_article_path(article)
       \|

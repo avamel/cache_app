@@ -12,4 +12,11 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def cache_key_for_articles
+    count          = Article.count
+    max_updated_at = Article.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    user_updated_at = User.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "articles/all-#{count}-#{max_updated_at}-#{user_updated_at}"
+  end
+
 end

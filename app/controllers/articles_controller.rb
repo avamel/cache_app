@@ -6,8 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @users = User.all
-    @articles = Article.all
+    @articles = Article.all.select(:id,:title, :content)
   end
 
   # GET /articles/1
